@@ -20,7 +20,7 @@ while guess != sercet:
 		print('傻逼，下次再来玩啊')
 		input('回车键关闭界面')
 	else:
-		if guess > sercet:
+		if guess > sercet: #写到这里才发现secret秘密拼错了
 			print('大了，傻逼')
 		else:
 			print('小了，傻逼!')
