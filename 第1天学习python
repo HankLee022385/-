@@ -1,0 +1,26 @@
+import random #导入随机模块
+sercet = random.randint(1,20) #使用模块，(1,20)是指1-20中的随机数
+print('---------艹，来玩祖安游戏-------------')
+temp = input('艹，看你能不能猜中我的心里的数字：')
+guess = int(temp)
+if guess == sercet: #if xx:  else:xx 条件语句
+	print('卧槽，你牛逼啊！')
+	print('傻逼，下次再来玩啊')
+	input('回车键关闭界面')
+else:
+	if guess > sercet:
+		print('大了，傻逼')
+	else:
+		print('小了，傻逼!')
+while guess != sercet:
+	temp = input('重猜：')
+	guess = int(temp)
+	if guess == sercet:
+		print('卧槽，你牛逼啊！')
+		print('傻逼，下次再来玩啊')
+		input('回车键关闭界面')
+	else:
+		if guess > sercet:
+			print('大了，傻逼')
+		else:
+			print('小了，傻逼!')
