@@ -1,0 +1,37 @@
+＃基于OpenCv制作人脸检测与人眼检测
+# 导入模块
+import cv2
+# 人脸识别
+face_read = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
+# 眼睛识别
+eye_read = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_eye.xml')
+
+# 创建视频捕获对象
+vc = cv2.VideoCapture(0)
+# 使用循环不断捕获视频图片
+while True:
+		ret, img = vc.read() #读取摄像头
+		faces = face_read.detectMultiScale(img, 1.3, 5)
+		for (x, y, w, h) in faces:
+			# 画出人脸框
+			img = cv2.rectangle(img, (x, y),(x+w, y+h),(255, 0, 0),2)
+			# 框出人脸，在人脸区域进行人眼检测
+			face_area = img[y:y+h, x:x+w]
+			eyes = eye_read.detectMultiScale(face_area)
+			# 用人眼级联分类器引擎在人脸区域识别人眼，返回eyes为眼睛坐标列表
+			for (ex, ey, ew, eh) in eyes:
+				# 画出人眼眶
+				cv2.rectangle(face_area, (ex, ey), (ex+ew, ey+eh), (0, 255, 0), 1)
+
+		if not ret:
+			print('没有捕获到视频')
+			break
+		# 4.展示图片
+		cv2.imshow('me', img)
+
+		# 5.等待键盘事件
+		if  cv2.waitKey(1) != -1: #判断我是否敲击键盘
+		# 6.关闭摄像头
+			vc.release()
+			cv2.destoryAllWindows()
+			break
